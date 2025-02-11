@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workplace Air Quality Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script>
+        function resetForm() {
+            document.getElementById("predictionForm").reset();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Workplace Air Quality Prediction</h1>
+        <form action="/" method="POST">
+            <label>Temperature (°C):</label>
+            <input type="number" step="0.1" name="temperature" required>
+
+            <label>Humidity (%):</label>
+            <input type="number" step="0.1" name="humidity" required>
+
+            <label>CO₂ Levels (ppm):</label>
+            <input type="number" step="1" name="co2" required>
+
+            <label>Dust Concentration (µg/m³):</label>
+            <input type="number" step="0.1" name="dust" required>
+
+            <button type="submit">Predict AQI</button>
+        </form>
+        
+        <h4><strong>Note:</strong>The prediction is based upon an assumed dateset. 
+            It can be fine-tuned</h4>
+            
+        {% if prediction %}
+            <div class="result {{ label_class }}">
+                <h2>Predicted AQI: {{ prediction }}</h2>
+                <h2>Air Quality: {{ label }}</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
